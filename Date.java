@@ -135,4 +135,13 @@ public class Date {
     }
   }
 
+  public boolean equals (Date other){
+    if(other == null){
+      return false;
+    }
+    return this._year == other._year && 
+           this._month == other._month &&
+           this._day == other._day;
+  }
+
 }
