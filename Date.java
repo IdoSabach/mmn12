@@ -23,8 +23,13 @@ public class Date {
     } else {
       defaultValues();
     }
-    System.out.println(_day + "." + _month + "." + _year);
   }
+
+  public Date(Date other) {
+    this._day = other._day;
+    this._month = other._month;
+    this._year = other._year;
+}
 
   public int getDay() {
     return _day;
@@ -168,9 +173,7 @@ public class Date {
 
   public int difference(Date other) {
     int num1 = calculateDate(this._day, this._month, this._year);
-    System.out.println(num1);
     int num2 = calculateDate(other._day, other._month, other._year);
-    System.out.println(num2);
     int num = Math.abs(num1-num2);
     return num;
   }
@@ -187,6 +190,15 @@ public class Date {
       str = this._day +"/"+this._month+"/"+this._year;
     }
     return str;
+  }
+
+  public Date addYearsToDate(int num){
+    Date newDate = new Date(this._day, this._month, this._year);
+    newDate._year += num;
+    if(this._month==2 && this._day==29 &&!isLeapYear(newDate._year)){
+      newDate._day =28;
+    }
+    return newDate;
   }
 
 }
