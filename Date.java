@@ -7,6 +7,10 @@ public class Date {
   private int _mount;
   private int _year;
 
+  private final int DEFAULT_DAY = 1;
+  private final int DEFAULT_MOUNT = 1;
+  private final int DEFAULT_YEAR = 2000;
+
   public Date(int day, int mount, int year) {
     if (year > 999 && year < 10000) {
       _year = year;
@@ -18,9 +22,7 @@ public class Date {
               _day = day;
               System.out.println("month with 31 day");
             } else {
-              _day = 1;
-              _mount = 1;
-              _year = 2000;
+              defaultValues();
             }
           }
           case 4, 6, 9, 11 -> {
@@ -28,9 +30,7 @@ public class Date {
               _day = day;
               System.out.println("month with 30 day");
             } else {
-              _day = 1;
-              _mount = 1;
-              _year = 2000;
+              defaultValues();
             }
           }
           case 2 -> {
@@ -39,36 +39,34 @@ public class Date {
                 _day = day;
                 System.out.println("leap year");
               } else {
-                _day = 1;
-                _mount = 1;
-                _year = 2000;
+                defaultValues();
               }
             } else {
               if (day > 0 && day < 29) {
                 _day = day;
                 System.out.println(" not leap year");
               } else {
-                _day = 1;
-                _mount = 1;
-                _year = 2000;
+                defaultValues();
               }
             }
           }
 
         }
       } else {
-        _day = 1;
-        _mount = 1;
-        _year = 2000;
+        defaultValues();
       }
     } else {
-      _day = 1;
-      _mount = 1;
-      _year = 2000;
+      defaultValues();
     }
 
     System.out.println(_day + "." + _mount + "." + _year);
 
+  }
+
+  private void defaultValues() {
+    _day = DEFAULT_DAY;
+    _mount = DEFAULT_MOUNT;
+    _year = DEFAULT_YEAR;
   }
 
   // checks if the year is a leap year
