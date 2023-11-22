@@ -24,9 +24,9 @@ public class Person {
   }
 
   public Person(Person other) {
-    _name = other._name;
-    _id = other._id;
-    _dateOfBirth = new Date(other._dateOfBirth);
+    this._name = other._name;
+    this._id = other._id;
+    this._dateOfBirth = new Date(other._dateOfBirth);
   }
 
   public String getName() {
