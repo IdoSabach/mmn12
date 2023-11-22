@@ -274,7 +274,7 @@ public class Apartment {
   public boolean changeTenant(Date startDate, Person candidateTenant, double price) {
     if (candidateTenant.getDateOfBirth().after(getTenant().getDateOfBirth()) &&
         price >= getPrice() &&
-        startDate.before(getRentalStartDate().addYearsToDate(-90))) {
+        startDate.difference(this._rentalEndDate)<90) {
       setTenant(candidateTenant);
       setPrice(price);
       setRentalStartDate(startDate);
