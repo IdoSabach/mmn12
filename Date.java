@@ -11,6 +11,19 @@ public class Date {
   private final int DEFAULT_month = 1;
   private final int DEFAULT_YEAR = 2000;
 
+  private final int JANUARY = 1;
+  private final int FEBRUARY = 2;
+  private final int MARCH = 3;
+  private final int APRIL = 4;
+  private final int MAY = 5;
+  private final int JUNE = 6;
+  private final int JULY = 7;
+  private final int AUGUST = 8;
+  private final int SEPTEMBER = 9;
+  private final int OCTOBER = 10;
+  private final int NOVEMBER = 11;
+  private final int DECEMBER = 12;
+
   public Date(int day, int month, int year) {
     if (year > 999 && year < 10000) {
       _year = year;
@@ -44,16 +57,15 @@ public class Date {
   }
 
   public void setDay(int day) {
-    if (_month == 1 || _month == 3 || _month == 5 || _month == 7
-        || _month == 8 || _month == 10 || _month == 12) {
+    if (_month == JANUARY || _month == MARCH || _month == MAY || _month == JULY || _month == AUGUST || _month == OCTOBER || _month == DECEMBER) {
       if (day > 0 && day < 32) {
         _day = day;
       }
-    } else if (_month == 4 || _month == 6 || _month == 9 || _month == 11) {
+    } else if (_month == APRIL || _month == JUNE || _month == SEPTEMBER || _month == NOVEMBER) {
       if (day > 0 && day < 31) {
         _day = day;
       }
-    } else if (_month == 2) {
+    } else if (_month == FEBRUARY) {
       if (isLeapYear(_year)) {
         if (day > 0 && day < 30) {
           _day = day;
@@ -92,13 +104,13 @@ public class Date {
 
   private void switchCaseFunc(int day, int month, int year) {
     switch (month) {
-      case 1:
-      case 3:
-      case 5:
-      case 7:
-      case 8:
-      case 10:
-      case 12: {
+      case JANUARY:
+      case MARCH:
+      case MAY:
+      case JULY:
+      case AUGUST: 
+      case OCTOBER:
+      case DECEMBER: {
         if (day > 0 && day < 32) {
           _day = day;
         } else {
@@ -106,10 +118,10 @@ public class Date {
         }
         break;
       }
-      case 4:
-      case 6:
-      case 9:
-      case 11: {
+      case APRIL:
+      case JUNE:
+      case SEPTEMBER:
+      case NOVEMBER: {
         if (day > 0 && day < 31) {
           _day = day;
         } else {
@@ -117,7 +129,7 @@ public class Date {
         }
         break;
       }
-      case 2: {
+      case FEBRUARY: {
         if (isLeapYear(year)) {
           if (day > 0 && day < 30) {
             _day = day;
@@ -195,7 +207,7 @@ public class Date {
   public Date addYearsToDate(int num) {
     Date newDate = new Date(this._day, this._month, this._year);
     newDate._year += num;
-    if (this._month == 2 && this._day == 29 && !isLeapYear(newDate._year)) {
+    if (this._month == FEBRUARY && this._day == 29 && !isLeapYear(newDate._year)) {
       newDate._day = 28;
     }
     return newDate;
