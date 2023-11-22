@@ -29,7 +29,7 @@ public class Date {
     this._day = other._day;
     this._month = other._month;
     this._year = other._year;
-}
+  }
 
   public int getDay() {
     return _day;
@@ -174,29 +174,29 @@ public class Date {
   public int difference(Date other) {
     int num1 = calculateDate(this._day, this._month, this._year);
     int num2 = calculateDate(other._day, other._month, other._year);
-    int num = Math.abs(num1-num2);
+    int num = Math.abs(num1 - num2);
     return num;
   }
 
-  public String toString(){
+  public String toString() {
     String str;
-    if(this._day < 10 && this._month<10){
-      str = "0"+this._day +"/"+"0"+this._month+"/"+this._year;
-    }else if(this._day < 10){
-      str = "0"+this._day +"/"+this._month+"/"+this._year;
-    }else if(this._month<10){
-      str = this._day +"/"+"0"+this._month+"/"+this._year;
-    }else{
-      str = this._day +"/"+this._month+"/"+this._year;
+    if (this._day < 10 && this._month < 10) {
+      str = "0" + this._day + "/" + "0" + this._month + "/" + this._year;
+    } else if (this._day < 10) {
+      str = "0" + this._day + "/" + this._month + "/" + this._year;
+    } else if (this._month < 10) {
+      str = this._day + "/" + "0" + this._month + "/" + this._year;
+    } else {
+      str = this._day + "/" + this._month + "/" + this._year;
     }
     return str;
   }
 
-  public Date addYearsToDate(int num){
+  public Date addYearsToDate(int num) {
     Date newDate = new Date(this._day, this._month, this._year);
     newDate._year += num;
-    if(this._month==2 && this._day==29 &&!isLeapYear(newDate._year)){
-      newDate._day =28;
+    if (this._month == 2 && this._day == 29 && !isLeapYear(newDate._year)) {
+      newDate._day = 28;
     }
     return newDate;
   }
