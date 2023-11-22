@@ -141,7 +141,11 @@ public class Apartment {
   }
 
   public void extendRentalPeriod(int year){
-    _rentalEndDate.addYearsToDate(year);
+    if(year<=0){
+      return;
+    }
+    Date newEndDate = _rentalEndDate.addYearsToDate(year);
+    _rentalEndDate = new Date(newEndDate);
   }
 
   public int daysLeft(Date d){
@@ -152,9 +156,9 @@ public class Apartment {
   }
 
   public boolean changeTenant(Date startDate, Person candidateTenant, double price) {
-    if (candidateTenant.compareTo(getTenant()) < 0 &&
+    if (candidateTenant.getDateOfBirth().before(getTenant().getDateOfBirth()) &&
         price >= getPrice() &&
-        startDate.before(getRentalEndDate().addYearsToDate(-1))) {
+        startDate.before(getRentalStartDate().addYearsToDate(-1))) {
       setTenant(candidateTenant);
       setPrice(price);
       setRentalStartDate(startDate);
@@ -163,6 +167,8 @@ public class Apartment {
     }
     return false;
   }
+
+  
   
 
 }
