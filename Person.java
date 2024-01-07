@@ -3,142 +3,145 @@
  */
 public class Person {
 
-   private String _name;
-   private String _id;
-   Date _dateOfBirth;
+    private String _name;
+    private String _id;
+    Date _dateOfBirth;
 
-   /**
-    * Constructs a new Person object with the specified name, ID, and date of birth.
-    *
-    * @param name        The name of the person. If null, the default name is set to "Someone".
-    * @param id          The ID of the person. If the length is not 9, the default ID is set to "000000000".
-    * @param dateOfBirth The date of birth of the person.
-    */
-   public Person(String name, String id, Date dateOfBirth) {
-      if (name == null) {
-         _name = "Someone";
-      } else {
-         _name = name;
-      }
+    private final int MAX_ID = 9;
 
-      if (id.length() != 9) {
-         _id = "000000000";
-      } else {
-         _id = id;
-      }
+    /**
+     * Person Constructor
+     *
+     * @param name - the person's name. If name is an empty string, assign the default string "Someone"
+     * @param day - the day of the Person's date of birth
+     * @param month - the month of the Person's date of birth
+     * @param year - the year of the Person's date of birth
+     * @param id - the person's id. If id doesn't contain 9 digits, assign the default string "000000000"
+     */
+    public Person(String name,int day , int month, int year, String id) {
+        if (name == null) {
+            _name = "Someone";
+        } else {
+            _name = name;
+        }
 
-      _dateOfBirth = new Date(dateOfBirth);
-   }
+        if (id.length() != MAX_ID) {
+            _id = "000000000";
+        } else {
+            _id = id;
+        }
 
-   /**
-    * Constructs a new Person object that is a copy of the specified Person object.
-    *
-    * @param other The Person object to copy.
-    */
-   public Person(Person other) {
-      this._name = other._name;
-      this._id = other._id;
-      this._dateOfBirth = new Date(other._dateOfBirth);
-   }
+        _dateOfBirth = new Date(day,month,year);
+    }
 
-   /**
-    * Gets the name of the person.
-    *
-    * @return The name of the person.
-    */
-   public String getName() {
-      return _name;
-   }
+    /**
+     * Copy Constructor
+     *
+     * @param other - the person to be copied
+     */
+    public Person(Person other) {
+        this._name = other._name;
+        this._id = other._id;
+        this._dateOfBirth = new Date(other._dateOfBirth);
+    }
 
-   /**
-    * Gets the ID of the person.
-    *
-    * @return The ID of the person.
-    */
-   public String getId() {
-      return _id;
-   }
+    /**
+     * Gets the person's name
+     *
+     * @return the person's name
+     */
+    public String getName() {
+        return _name;
+    }
 
-   /**
-    * Gets the date of birth of the person.
-    *
-    * @return The date of birth of the person.
-    */
-   public Date getDateOfBirth() {
-      return new Date(_dateOfBirth);
-   }
+    /**
+     * Gets the person's id
+     *
+     * @return person's id
+     */
+    public String getId() {
+        return _id;
+    }
 
-   /**
-    * Sets the name of the person.
-    *
-    * @param name The new name of the person. If null, the default name is set to "someone".
-    */
-   public void setName(String name) {
-      if (name == null) {
-         _name = "someone";
-      } else {
-         _name = name;
-      }
-   }
+    /**
+     * Gets the person's date of birth
+     *
+     * @return person's date of birth
+     */
+    public Date getDateOfBirth() {
+        return new Date(_dateOfBirth);
+    }
 
-   /**
-    * Sets the ID of the person.
-    *
-    * @param id The new ID of the person. If the length is not 9, the ID is not updated.
-    */
-   public void setId(String id) {
-      if (id.length() == 9) {
-         _id = id;
-      }
-   }
+    /**
+     * Sets the person's name (only if the string given is not empty)
+     *
+     * @param name - the person's new name
+     */
+    public void setName(String name) {
+        if (name == null) {
+            _name = "someone";
+        } else {
+            _name = name;
+        }
+    }
 
-   /**
-    * Sets the date of birth of the person.
-    *
-    * @param d The new date of birth.
-    */
-   public void setDateOfBirth(Date d) {
-      _dateOfBirth = new Date(d);
-   }
+    /**
+     * Sets the person's id (only if the id is 9 digits)
+     *
+     * @param id - the person's new id
+     */
+    public void setId(String id) {
+        if (id.length() == MAX_ID) {
+            _id = id;
+        }
+    }
 
-   /**
-    * Returns a string representation of the person.
-    *
-    * @return The string representation of the person.
-    */
-   public String toString() {
-      return "Name: " + _name + "\n" +
-              "ID: " + _id + "\n" +
-              "Date of birth: " + _dateOfBirth.toString();
-   }
+    /**
+     * Sets the person's date of birth
+     *
+     * @param d - the person's new date of birth
+     */
+    public void setDateOfBirth(Date d) {
+        _dateOfBirth = new Date(d);
+    }
 
-   /**
-    * Checks if the current person is equal to another person.
-    *
-    * @param other The person to compare.
-    * @return True if the persons are equal, false otherwise.
-    */
-   public boolean equals(Person other) {
-      return this._name.equals(other._name) &&
-              this._id.equals(other._id) &&
-              this._dateOfBirth.equals(other._dateOfBirth);
-   }
+    /**
+     * Returns a String that represents this Person
+     *
+     * @return a String that represents this Person
+     */
+    public String toString() {
+        return "Name: " + _name + "\n" +
+        "ID: " + _id + "\n" +
+        "Date of birth: " + _dateOfBirth.toString();
+    }
 
-   /**
-    * Compares the current person's date of birth with another person's date of birth.
-    *
-    * @param other The person to compare.
-    * @return -1 if the current person's date of birth is after the other person's,
-    *         1 if it's before, and 0 if they are equal.
-    */
-   public int compareTo(Person other) {
-      if (this._dateOfBirth.after(other._dateOfBirth)) {
-         return -1;
-      } else if (this._dateOfBirth.before(other._dateOfBirth)) {
-         return 1;
-      } else {
-         return 0;
-      }
-   }
+    /**
+     * Checks if two Person objects are the same
+     *
+     * @param other - another person object
+     * @return true if all the attributes are the same
+     */
+    public boolean equals(Person other) {
+        return this._name.equals(other._name) &&
+        this._id.equals(other._id) &&
+        this._dateOfBirth.equals(other._dateOfBirth);
+    }
+
+    /**
+     * Checks which person is older
+     *
+     * @param other - another person object
+     * @return 1 if this person is older than the other person , -1 if the other person is older than this person. If both people have the same birth date, return 0.
+     */
+    public int compareTo(Person other) {
+        if (this._dateOfBirth.after(other._dateOfBirth)) {
+            return -1;
+        } else if (this._dateOfBirth.before(other._dateOfBirth)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }
 
