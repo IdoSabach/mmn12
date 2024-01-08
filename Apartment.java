@@ -1,6 +1,10 @@
 /**
  * The Apartment class represents an apartment with details such as the number
  * of rooms, area, price, tenant, and rental dates.
+ * 
+ * @author Ido Sabach
+ * @version 1.0
+ * @since 08/01/2024
  */
 public class Apartment {
 
@@ -17,70 +21,70 @@ public class Apartment {
   private final double DEFAULT_PRICE = 5000;
 
   /**
-   * Constructs a new Apartment object with the specified details.
+   * Apartment Constructor
    *
-   * @param room   The number of rooms in the apartment. If less than or equal to
-   *               0, the default is set to 3.
-   * @param area   The area of the apartment. If less than or equal to 0, the
-   *               default is set to 80.
-   * @param price  The price of the apartment. If less than or equal to 0, the
-   *               default is set to 5000.
-   * @param tenant The tenant of the apartment.
-   * @param start  The rental start date.
-   * @param end    The rental end date. If before the start date, a default end
-   *               date is set.
+   * @param noOfRooms - the number of rooms the apartment has
+   * @param area - the apartment's area
+   * @param price - monthly price to rent the apartment
+   * @param p - the person renting the apartment
+   * @param startDay - starting day of apartment rental
+   * @param startMonth - starting month of apartment rental
+   * @param startYear - starting year of apartment rental
+   * @param endDay - last day of apartment rental
+   * @param endMonth - last month of apartment rental
+   * @param endYear - last year of apartment rental
    */
-  public Apartment(int room, double area, double price, Person tenant, Date start, Date end) {
-    if (room <= 0) {
-      _noOfRooms = DEFAULT_ROOM;
-    } else {
-      _noOfRooms = room;
-    }
+  public Apartment(int room, double area, double price, Person tenant,int startDay, int startMonth, int startYear, int endDay, int endMonth, int endYear) {
+      if (room <= 0) {
+          _noOfRooms = DEFAULT_ROOM;
+      } else {
+          _noOfRooms = room;
+      }
 
-    if (area <= 0) {
-      _area = DEFAULT_AREA;
-    } else {
-      _area = area;
-    }
+      if (area <= 0) {
+          _area = DEFAULT_AREA;
+      } else {
+          _area = area;
+      }
 
-    if (price <= 0) {
-      _price = DEFAULT_PRICE;
-    } else {
-      _price = price;
-    }
+      if (price <= 0) {
+          _price = DEFAULT_PRICE;
+      } else {
+          _price = price;
+      }
 
-    _tenant = new Person(tenant);
-    _rentalStartDate = new Date(start);
+      _tenant = new Person(tenant);
+      _rentalStartDate = new Date(startDay,startMonth,startYear);
+      _rentalEndDate = new Date(endDay,endMonth,endYear);
 
-    if (end.after(start)) {
-      _rentalEndDate = new Date(end);
-    } else {
-      _rentalEndDate = end.addYearsToDate(DEFAULT_NUM_FOR_ADD_DATE);
-    }
+      if (_rentalEndDate.after(_rentalStartDate)) {
+          _rentalEndDate = new Date(endDay,endMonth,endYear);
+      } else {
+          _rentalEndDate = _rentalEndDate.addYearsToDate(DEFAULT_NUM_FOR_ADD_DATE);
+      }
   }
 
   /**
-   * Constructs a new Apartment object that is a copy of the specified Apartment
-   * object.
+   * Copy Constructor
    *
-   * @param other The Apartment object to copy.
+   * @param other - the apartment to be copied
    */
   public Apartment(Apartment other) {
-    this._noOfRooms = other._noOfRooms;
-    this._area = other._area;
-    this._price = other._price;
-    this._tenant = new Person(other._tenant);
-    this._rentalStartDate = new Date(other._rentalStartDate);
-    this._rentalEndDate = new Date(other._rentalEndDate);
+      this._noOfRooms = other._noOfRooms;
+      this._area = other._area;
+      this._price = other._price;
+      this._tenant = new Person(other._tenant);
+      this._rentalStartDate = new Date(other._rentalStartDate);
+      this._rentalEndDate = new Date(other._rentalEndDate);
   }
 
   /**
-   * Gets the number of rooms in the apartment.
+   * Gets the number of rooms the apartment has
    *
-   * @return The number of rooms.
+   * @return the number of rooms the apartment has
    */
   public int getNoOfRooms() {
-    return _noOfRooms;
+      return _noOfRooms;
   }
 
   /**
@@ -89,7 +93,7 @@ public class Apartment {
    * @return The area of the apartment.
    */
   public double getArea() {
-    return _area;
+      return _area;
   }
 
   /**
@@ -98,16 +102,16 @@ public class Apartment {
    * @return The price of the apartment.
    */
   public double getPrice() {
-    return _price;
+      return _price;
   }
 
   /**
-   * Gets the tenant of the apartment.
+   * Gets the tenant renting the apartment
    *
-   * @return The tenant of the apartment.
+   * @return the tenant renting the apartment
    */
   public Person getTenant() {
-    return new Person(_tenant);
+      return new Person(_tenant);
   }
 
   /**
@@ -116,7 +120,7 @@ public class Apartment {
    * @return The rental start date.
    */
   public Date getRentalStartDate() {
-    return new Date(_rentalStartDate);
+      return new Date(_rentalStartDate);
   }
 
   /**
@@ -125,164 +129,159 @@ public class Apartment {
    * @return The rental end date.
    */
   public Date getRentalEndDate() {
-    return new Date(_rentalEndDate);
+      return new Date(_rentalEndDate);
   }
 
   /**
-   * Sets the number of rooms in the apartment.
+   * Sets the apartment's number of rooms (only if the new value is positive)
    *
-   * @param num The new number of rooms. If less than or equal to 0, the default
-   *            is set to 3.
+   * @param noOfRooms - new number of rooms
    */
   public void setNoOfRooms(int num) {
-    if (num <= 0) {
-      _noOfRooms = DEFAULT_ROOM;
-    } else {
-      _noOfRooms = num;
-    }
+      if (num <= 0) {
+          _noOfRooms = DEFAULT_ROOM;
+      } else {
+          _noOfRooms = num;
+      }
   }
 
   /**
-   * Sets the area of the apartment.
+   * Sets the apartment's area (only if the new value is positive)
    *
-   * @param area The new area. If less than or equal to 0, the default is set to
-   *             80.
+   * @param area - apartment's new area
    */
   public void setArea(double area) {
-    if (area <= 0) {
-      _area = DEFAULT_AREA;
-    } else {
-      _area = area;
-    }
+      if (area <= 0) {
+          _area = DEFAULT_AREA;
+      } else {
+          _area = area;
+      }
   }
 
   /**
-   * Sets the price of the apartment.
+   * Sets the apartment's price (only if the new value is positive)
    *
-   * @param price The new price. If less than or equal to 0, the default is set to
-   *              5000.
+   * @param price - apartment's new price
+
    */
   public void setPrice(double price) {
-    if (price <= 0) {
-      _price = DEFAULT_PRICE;
-    } else {
-      _price = price;
-    }
+      if (price <= 0) {
+          _price = DEFAULT_PRICE;
+      } else {
+          _price = price;
+      }
   }
 
   /**
-   * Sets the tenant of the apartment.
+   * Sets the apartment's tenant
    *
-   * @param p The new tenant.
+   * @param tenant - apartment's new tenant
    */
   public void setTenant(Person p) {
-    _tenant = new Person(p);
+      _tenant = new Person(p);
   }
 
   /**
-   * Sets the rental start date.
+   * Sets the apartment's rental start date (only if the new rental start date is before the current rental end date)
    *
-   * @param d The new rental start date.
+   * @param rentalStartDate - apartment's new rental start date
    */
   public void setRentalStartDate(Date d) {
-    _rentalStartDate = new Date(d);
+      _rentalStartDate = new Date(d);
   }
 
   /**
-   * Sets the rental end date.
+   * Sets the apartment's rental end date (only if the new rental end date is after the current rental start date)
    *
-   * @param d The new rental end date. If before the start date, a default end
-   *          date is set.
+   * @param rentalEndDate - apartment's new rental end date
    */
   public void setRentalEndDate(Date d) {
-    if (d.after(getRentalStartDate())) {
-      _rentalEndDate = new Date(d);
-    } else {
-      _rentalEndDate = d.addYearsToDate(DEFAULT_NUM_FOR_ADD_DATE);
-    }
+      if (d.after(getRentalStartDate())) {
+          _rentalEndDate = new Date(d);
+      } else {
+          _rentalEndDate = d.addYearsToDate(DEFAULT_NUM_FOR_ADD_DATE);
+      }
   }
 
   /**
-   * Returns a string representation of the apartment.
+   * Returns a String that represents this Apartment
    *
-   * @return The string representation of the apartment.
+   * @return a String that represents this Apartment
    */
   public String toString() {
-    return "Number of rooms: " + _noOfRooms + "\n" +
-        "Area: " + _area + "\n" +
-        "Price: " + _price + " NIS" + "\n" +
-        "Tenant name: " + _tenant.getName() + "\n" +
-        "Rental start date: " + _rentalStartDate.toString() + "\n" +
-        "Rental end date: " + _rentalEndDate.toString();
+      return "Number of rooms: " + _noOfRooms + "\n" +
+      "Area: " + _area + "\n" +
+      "Price: " + _price + " NIS" + "\n" +
+      "Tenant name: " + _tenant.getName() + "\n" +
+      "Rental start date: " + _rentalStartDate.toString() + "\n" +
+      "Rental end date: " + _rentalEndDate.toString();
   }
 
   /**
-   * Checks if the current apartment is equal to another apartment.
+   * Checks if the current and other apartments are equal by all the apartment attributes
    *
-   * @param other The apartment to compare.
-   * @return True if the apartments are equal, false otherwise.
+   * @param other - an apartment object
+   * @return true if the two objects are equal. Otherwise, returns false
    */
   public boolean equals(Apartment other) {
-    if (this._noOfRooms == other._noOfRooms &&
-        this._area == other._area &&
-        this._price == other._price &&
-        this._tenant.equals(other._tenant) &&
-        this._rentalStartDate.equals(other._rentalStartDate) &&
-        this._rentalEndDate.equals(other._rentalEndDate)) {
-      return true;
-    } else {
-      return false;
-    }
+      if (this._noOfRooms == other._noOfRooms &&
+      this._area == other._area &&
+      this._price == other._price &&
+      this._tenant.equals(other._tenant) &&
+      this._rentalStartDate.equals(other._rentalStartDate) &&
+      this._rentalEndDate.equals(other._rentalEndDate)) {
+          return true;
+      } else {
+          return false;
+      }
   }
 
   /**
-   * Extends the rental period by the specified number of years.
+   * Extends the rental period by additional years(only if the years value is positive)
    *
-   * @param year The number of years to extend the rental period.
+   * @paramyears - the number of years to extend the lease
    */
   public void extendRentalPeriod(int year) {
-    if (year <= 0) {
-      return;
-    }
-    Date newEndDate = _rentalEndDate.addYearsToDate(year);
-    _rentalEndDate = new Date(newEndDate);
+      if (year <= 0) {
+          return;
+      }
+      Date newEndDate = _rentalEndDate.addYearsToDate(year);
+      _rentalEndDate = new Date(newEndDate);
   }
 
   /**
-   * Calculates the number of days left until the specified date.
+   * Computes the number of days left between a given date and the end of rental date. If the given date comes after the end of rental date, returns -1.
    *
-   * @param d The date to calculate the days left until.
-   * @return The number of days left. If the specified date is after the rental
-   *         end date, returns -1.
+   * @param d - a date object
+   * @return the number of days left between a given date and the end of rental date
    */
   public int daysLeft(Date d) {
-    if (d.after(_rentalEndDate)) {
-      return -1;
-    }
-    return _rentalEndDate.difference(d);
+      if (d.after(_rentalEndDate)) {
+          return -1;
+      }
+      return _rentalEndDate.difference(d);
   }
 
   /**
-   * Changes the tenant, rental start date, and price of the apartment if
-   * conditions are met.
+   * Checks if the apartment's tenant can be replaced and update apartment attributes accordingly ( if the tenant is younger, the rental end date ends up to 90 days after the new rental start date and the new price is at least the current rental's price)
    *
    * @param startDate       The new rental start date.
    * @param candidateTenant The new tenant.
    * @param price           The new price.
-   * @return True if the tenant is changed, false otherwise.
+   * @return true if the tenant has been changed
    */
-  public boolean changeTenant(Date startDate, Person candidateTenant, double price) {
-    if (candidateTenant.getDateOfBirth().after(getTenant().getDateOfBirth()) &&
-        price >= getPrice() &&
-        startDate.difference(this._rentalEndDate)<90) {
-      setTenant(candidateTenant);
-      setPrice(price);
-      setRentalStartDate(startDate);
-      setRentalEndDate(startDate.addYearsToDate(1));
-      return true;
-    }
+  public boolean changeTenant(Date startDate, Person p, double price) {
+      if (p.getDateOfBirth().after(getTenant().getDateOfBirth()) &&
+      price >= getPrice() &&
+      startDate.difference(this._rentalEndDate)<=90) {
+          setTenant(p);
+          setPrice(price);
+          setRentalStartDate(startDate);
+          setRentalEndDate(startDate.addYearsToDate(1));
+          return true;
+      }
 
-    return false;
+      return false;
 
   }
 

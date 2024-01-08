@@ -1,5 +1,9 @@
 /**
  * The Person class represents a person with a name, ID, and date of birth.
+ * 
+ * @author Ido Sabach
+ * @version 1.0
+ * @since 08/01/2024
  */
 public class Person {
 

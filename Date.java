@@ -1,5 +1,9 @@
 /**
  * The Date class represents a date in the Gregorian calendar.
+ * 
+ * @author Ido Sabach
+ * @version 1.0
+ * @since 08/01/2024
  */
 public class Date {
 
@@ -301,8 +305,11 @@ public class Date {
     public Date addYearsToDate(int num) {
         Date newDate = new Date(this._day, this._month, this._year);
         newDate._year += num;
-        if (this._month == FEBRUARY && this._day == 29 && !isLeapYear(newDate._year)) {
-            newDate._day = 28;
+        if (this._month == FEBRUARY && this._day == MAX_LEAP_MONTH && !isLeapYear(newDate._year)) {
+            newDate._day = MAX_FEB_MONTH;
+        }
+        if(this._month == FEBRUARY && this._day == MAX_FEB_MONTH && isLeapYear(newDate._year)){
+            newDate._day = MAX_LEAP_MONTH;
         }
         return newDate;
     }
